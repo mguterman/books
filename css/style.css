@@ -846,6 +846,10 @@ h1, h2, h3, h4 {
 }
 .buy-help-modal.is-open .buy-help-modal__panel { transform: translateY(0); }
 
+.buy-help-modal__panel--author {
+  width: min(560px, 100%);
+}
+
 .buy-help-modal__panel h2 {
   margin-bottom: 12px;
   color: var(--navy-800);
@@ -856,6 +860,10 @@ h1, h2, h3, h4 {
   color: var(--text-700);
   font-size: 0.98rem;
   line-height: 1.65;
+}
+
+.buy-help-modal__panel p + p {
+  margin-top: 12px;
 }
 
 .buy-help-modal__close {

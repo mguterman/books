@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   highlightNav();
   initBuyHelpModal();
+  initAuthorHelpModal();
 
   if (page === 'home') {
     initScrollHeader();
@@ -24,31 +25,6 @@ function initHome() {
   if (grid) {
     BookComponents.renderGrid(grid, { all: true });
   }
-
-  renderAuthorBio();
-  renderAuthorPhoto();
-}
-
-function renderAuthorBio() {
-  const container = document.getElementById('author-bio');
-  if (!container || typeof SITE_CONTENT === 'undefined' || !SITE_CONTENT.authorBio) return;
-
-  container.innerHTML = SITE_CONTENT.authorBio
-    .map(paragraph => `<p>${paragraph}</p>`)
-    .join('');
-}
-
-function renderAuthorPhoto() {
-  const container = document.getElementById('author-photo');
-  if (!container || typeof SITE_CONTENT === 'undefined' || !SITE_CONTENT.authorPhoto) return;
-
-  container.innerHTML = `
-    <img
-      src="${SITE_CONTENT.authorPhoto}"
-      alt="Мордехай Гутерман"
-      class="about__photo"
-    >
-  `;
 }
 
 // ── Страница книги ────────────────────────────────────────────
@@ -126,6 +102,66 @@ function initBuyHelpModal() {
     closeButton = modal.querySelector('.buy-help-modal__close');
 
     modal.querySelectorAll('[data-buy-help-close]').forEach(element => {
+      element.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', onKeydown);
+    requestAnimationFrame(() => {
+      modal.classList.add('is-open');
+      closeButton.focus();
+    });
+  };
+
+  triggers.forEach(trigger => trigger.addEventListener('click', openModal));
+}
+
+function initAuthorHelpModal() {
+  const triggers = document.querySelectorAll('[data-author-help]');
+  if (!triggers.length) return;
+
+  let modal = null;
+  let closeButton = null;
+
+  const closeModal = () => {
+    if (!modal) return;
+
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+    modal.addEventListener('transitionend', () => {
+      modal.remove();
+      modal = null;
+      closeButton = null;
+    }, { once: true });
+  };
+
+  const onKeydown = event => {
+    if (event.key === 'Escape') closeModal();
+  };
+
+  const openModal = () => {
+    if (modal) return;
+
+    const paragraphs = typeof SITE_CONTENT !== 'undefined' && SITE_CONTENT.authorBio
+      ? SITE_CONTENT.authorBio.map(paragraph => `<p>${paragraph}</p>`).join('')
+      : '<p>Информация об авторе скоро появится.</p>';
+
+    modal = document.createElement('div');
+    modal.className = 'buy-help-modal';
+    modal.innerHTML = `
+      <div class="buy-help-modal__backdrop" data-author-help-close></div>
+      <section class="buy-help-modal__panel buy-help-modal__panel--author" role="dialog" aria-modal="true" aria-labelledby="author-help-title">
+        <button type="button" class="buy-help-modal__close" data-author-help-close aria-label="Закрыть">×</button>
+        <h2 id="author-help-title">Об авторе</h2>
+        ${paragraphs}
+      </section>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    closeButton = modal.querySelector('.buy-help-modal__close');
+
+    modal.querySelectorAll('[data-author-help-close]').forEach(element => {
       element.addEventListener('click', closeModal);
     });
 
