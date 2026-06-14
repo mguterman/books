@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
 
   highlightNav();
+  initBuyHelpModal();
 
   if (page === 'home') {
     initScrollHeader();
@@ -79,6 +80,63 @@ function highlightNav() {
       a.classList.add('is-active');
     }
   });
+}
+
+// ── Попап с инструкцией покупки ──────────────────────────────
+function initBuyHelpModal() {
+  const triggers = document.querySelectorAll('[data-buy-help]');
+  if (!triggers.length) return;
+
+  let modal = null;
+  let closeButton = null;
+
+  const closeModal = () => {
+    if (!modal) return;
+
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+    modal.addEventListener('transitionend', () => {
+      modal.remove();
+      modal = null;
+      closeButton = null;
+    }, { once: true });
+  };
+
+  const onKeydown = event => {
+    if (event.key === 'Escape') closeModal();
+  };
+
+  const openModal = () => {
+    if (modal) return;
+
+    modal = document.createElement('div');
+    modal.className = 'buy-help-modal';
+    modal.innerHTML = `
+      <div class="buy-help-modal__backdrop" data-buy-help-close></div>
+      <section class="buy-help-modal__panel" role="dialog" aria-modal="true" aria-labelledby="buy-help-title">
+        <button type="button" class="buy-help-modal__close" data-buy-help-close aria-label="Закрыть">×</button>
+        <h2 id="buy-help-title">Как купить книги?</h2>
+        <p>Выберите книгу, откройте страницу с описанием и нажмите кнопку доступной площадки. Заказ, оплата и доставка оформляются на сайте продавца.</p>
+      </section>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    closeButton = modal.querySelector('.buy-help-modal__close');
+
+    modal.querySelectorAll('[data-buy-help-close]').forEach(element => {
+      element.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', onKeydown);
+    requestAnimationFrame(() => {
+      modal.classList.add('is-open');
+      closeButton.focus();
+    });
+  };
+
+  triggers.forEach(trigger => trigger.addEventListener('click', openModal));
 }
 
 // ── Прозрачный хедер → тёмный при скролле ───────────────────
