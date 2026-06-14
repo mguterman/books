@@ -93,7 +93,7 @@ function initBuyHelpModal() {
       <section class="buy-help-modal__panel" role="dialog" aria-modal="true" aria-labelledby="buy-help-title">
         <button type="button" class="buy-help-modal__close" data-buy-help-close aria-label="Закрыть">×</button>
         <h2 id="buy-help-title">Как купить книги?</h2>
-        <p>Выберите книгу, откройте страницу с описанием и нажмите кнопку доступной площадки. Заказ, оплата и доставка оформляются на сайте продавца.</p>
+        <p>Выберите книгу, откройте страницу с описанием и выберите удобное для вас место покупки. Заказ, оплата и доставка оформляются на сайте продавца.</p>
       </section>
     `;
 
