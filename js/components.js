@@ -115,13 +115,7 @@ const BookComponents = {
           <p class="book-detail__long-desc">${book.longDescription.replace(/\n/g, '<br>')}</p>
           <div id="buy-${book.id}" class="buy-section"></div>
         </div>
-        ${book.excerpt ? `
-          <aside class="book-detail__excerpt-col" aria-label="Отрывок">
-            ${this._dividerHTML()}
-            <h2 class="section-title">Отрывок</h2>
-            <blockquote class="excerpt-text">${book.excerpt.replace(/\n/g, '<br>')}</blockquote>
-          </aside>
-        ` : ''}
+        ${this._renderBookTabsHTML(book)}
       </div>
     `;
     detail.appendChild(headerEl);
@@ -176,9 +170,107 @@ const BookComponents = {
     // Рендерим секцию покупки — после того как el добавлен в DOM
     const buyEl = detail.querySelector(`#buy-${book.id}`);
     if (buyEl) this._renderBuySection(buyEl, book.editions);
+
+    this._initBookTabs(detail);
   },
 
-  // ── Секция «Купить» ──────────────────────────────────────
+  // ── Вкладки: отрывок, оглавление, страницы ────────────────
+  _renderBookTabsHTML(book) {
+    const content = typeof BOOK_CONTENT !== 'undefined' ? BOOK_CONTENT[book.id] : null;
+    const hasExcerpt = Boolean(book.excerpt);
+    const hasToc = Boolean(content && content.toc && content.toc.length > 0);
+    const hasPages = Boolean(content && content.pages && content.pages.length > 0);
+
+    if (!hasExcerpt && !hasToc && !hasPages) return '';
+
+    return `
+      <aside class="book-detail__excerpt-col book-tabs" aria-label="Материалы книги">
+        <div class="book-tabs__list" role="tablist" aria-label="Материалы книги">
+          <button type="button" class="book-tabs__tab is-active" role="tab" aria-selected="true" aria-controls="tab-excerpt-${book.id}" id="tab-excerpt-button-${book.id}" data-book-tab="excerpt">Отрывок</button>
+          <button type="button" class="book-tabs__tab" role="tab" aria-selected="false" aria-controls="tab-toc-${book.id}" id="tab-toc-button-${book.id}" data-book-tab="toc">Оглавление</button>
+          <button type="button" class="book-tabs__tab" role="tab" aria-selected="false" aria-controls="tab-pages-${book.id}" id="tab-pages-button-${book.id}" data-book-tab="pages">Страницы</button>
+        </div>
+
+        <div class="book-tabs__panel is-active" role="tabpanel" id="tab-excerpt-${book.id}" aria-labelledby="tab-excerpt-button-${book.id}" data-book-panel="excerpt">
+          ${hasExcerpt ? `<blockquote class="excerpt-text">${book.excerpt.replace(/\n/g, '<br>')}</blockquote>` : '<p class="book-tabs__empty">Отрывок скоро появится.</p>'}
+        </div>
+
+        <div class="book-tabs__panel" role="tabpanel" id="tab-toc-${book.id}" aria-labelledby="tab-toc-button-${book.id}" data-book-panel="toc" hidden>
+          ${hasToc ? this._renderTocHTML(content.toc) : '<p class="book-tabs__empty">Оглавление скоро появится.</p>'}
+        </div>
+
+        <div class="book-tabs__panel" role="tabpanel" id="tab-pages-${book.id}" aria-labelledby="tab-pages-button-${book.id}" data-book-panel="pages" hidden>
+          ${hasPages ? this._renderPagesHTML(content.pages) : '<p class="book-tabs__empty">Страницы печатного издания скоро появятся.</p>'}
+        </div>
+      </aside>
+    `;
+  },
+
+  _renderTocHTML(toc) {
+    return `
+      <div class="toc-list">
+        ${toc.map(entry => {
+          if (entry.type === 'heading') {
+            if (entry.visible === false) return '';
+            return `<h3 class="toc-list__heading">${entry.title}</h3>`;
+          }
+
+          return `
+            <div class="toc-list__item">
+              <span class="toc-list__title">${entry.title}</span>
+              <span class="toc-list__dots" aria-hidden="true"></span>
+              <span class="toc-list__page">${entry.page}</span>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  },
+
+  _renderPagesHTML(pages) {
+    return `
+      <div class="page-preview-grid">
+        ${pages.map(page => `
+          <button type="button" class="page-preview" data-page-image="${page.image}" data-page-title="${page.title}">
+            <img src="${page.image}" alt="${page.alt || page.title}" loading="lazy">
+            <span>${page.title}</span>
+          </button>
+        `).join('')}
+      </div>
+    `;
+  },
+
+  _initBookTabs(root) {
+    root.querySelectorAll('.book-tabs').forEach(tabs => {
+      const tabButtons = tabs.querySelectorAll('[data-book-tab]');
+      const panels = tabs.querySelectorAll('[data-book-panel]');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const target = button.dataset.bookTab;
+
+          tabButtons.forEach(tab => {
+            const isActive = tab === button;
+            tab.classList.toggle('is-active', isActive);
+            tab.setAttribute('aria-selected', String(isActive));
+          });
+
+          panels.forEach(panel => {
+            const isActive = panel.dataset.bookPanel === target;
+            panel.classList.toggle('is-active', isActive);
+            panel.hidden = !isActive;
+          });
+        });
+      });
+
+      tabs.querySelectorAll('[data-page-image]').forEach(button => {
+        button.addEventListener('click', () => {
+          this._openLightbox(button.dataset.pageImage, button.dataset.pageTitle || '');
+        });
+      });
+    });
+  },
+
   _renderBuySection(parent, editions) {
     if (!editions || editions.length === 0) return;
 

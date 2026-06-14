@@ -674,6 +674,120 @@ h1, h2, h3, h4 {
   background: transparent;
 }
 
+/* ── Вкладки: отрывок, оглавление, страницы ─────────────── */
+.book-tabs__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 22px;
+  border: 1px solid var(--paper);
+  border-radius: var(--radius-sm);
+  background: var(--parchment);
+}
+
+.book-tabs__tab {
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-500);
+  cursor: pointer;
+  font-family: 'Lora', serif;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.book-tabs__tab:hover,
+.book-tabs__tab.is-active {
+  background: var(--cream);
+  color: var(--navy-800);
+  box-shadow: var(--shadow-sm);
+}
+
+.book-tabs__tab:focus-visible {
+  outline: 1px solid var(--gold-500);
+  outline-offset: 2px;
+}
+
+.book-tabs__panel {
+  max-height: 720px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.book-tabs__empty {
+  padding: 28px;
+  border: 1px dashed var(--gold-300);
+  border-radius: var(--radius-sm);
+  color: var(--text-500);
+  background: var(--cream);
+  font-style: italic;
+  text-align: center;
+}
+
+.toc-list {
+  display: grid;
+  gap: 8px;
+  color: var(--text-700);
+}
+
+.toc-list__heading {
+  margin: 18px 0 4px;
+  font-size: 1rem;
+  color: var(--navy-800);
+}
+.toc-list__heading:first-child { margin-top: 0; }
+
+.toc-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.toc-list__dots {
+  min-width: 24px;
+  border-bottom: 1px dotted rgba(108, 108, 128, 0.45);
+  transform: translateY(-4px);
+}
+
+.toc-list__page {
+  color: var(--text-500);
+  font-size: 0.88rem;
+}
+
+.page-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.page-preview {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-700);
+  cursor: pointer;
+  font-family: 'Lora', serif;
+  font-size: 0.86rem;
+  text-align: left;
+}
+
+.page-preview img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
 /* ── Секция покупки ─────────────────────────────────────── */
 .buy-section {
   border-top: 1px solid var(--paper);
@@ -1079,6 +1193,20 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 480px) {
+  .book-tabs__list {
+    gap: 3px;
+  }
+
+  .book-tabs__tab {
+    min-height: 36px;
+    padding: 7px 6px;
+    font-size: 0.72rem;
+  }
+
+  .toc-list__item {
+    font-size: 0.9rem;
+  }
+
   .books-grid { grid-template-columns: 1fr; }
 
   .hero__name { font-size: 2.6rem; }
