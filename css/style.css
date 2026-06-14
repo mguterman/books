@@ -1042,7 +1042,7 @@ h1, h2, h3, h4 {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .nav {
     height: auto;
     align-items: flex-start;
@@ -1076,7 +1076,9 @@ h1, h2, h3, h4 {
   .page-book-top {
     height: 104px;
   }
+}
 
+@media (max-width: 480px) {
   .books-grid { grid-template-columns: 1fr; }
 
   .hero__name { font-size: 2.6rem; }
