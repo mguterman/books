@@ -297,9 +297,10 @@ h1, h2, h3, h4 {
 .btn--amazon {
   background: var(--navy-700);
   color: var(--text-light);
-  font-size: 0.82rem;
-  padding: 9px 14px;
-  gap: 6px;
+  font-size: 0.78rem;
+  padding: 9px 10px;
+  gap: 5px;
+  justify-content: center;
 }
 .btn--amazon:hover {
   background: var(--navy-600);
@@ -585,10 +586,14 @@ h1, h2, h3, h4 {
   padding: 50px 0 70px;
 }
 
+.book-detail__header .container {
+  max-width: 1680px;
+}
+
 .book-detail__header-inner {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 60px;
+  grid-template-columns: 220px minmax(400px, 520px) minmax(520px, 1fr);
+  gap: 28px;
   align-items: start;
 }
 
@@ -631,6 +636,27 @@ h1, h2, h3, h4 {
   max-width: 520px;
 }
 
+.book-detail__excerpt-col {
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  min-width: 0;
+  padding: 28px 32px 34px;
+}
+
+.book-detail__excerpt-col .section-divider {
+  margin-top: 0;
+}
+
+.book-detail__excerpt-col .section-title {
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.book-detail__excerpt-col .excerpt-text {
+  background: transparent;
+}
+
 /* ── Секция покупки ─────────────────────────────────────── */
 .buy-section {
   border-top: 1px solid var(--paper);
@@ -645,37 +671,27 @@ h1, h2, h3, h4 {
   margin-bottom: 14px;
 }
 
-.edition-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 22px;
-  role: tablist;
+.edition-list {
+  display: grid;
+  gap: 18px;
 }
 
-.edition-tab {
-  padding: 8px 18px;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid rgba(60, 60, 80, 0.3);
-  background: transparent;
-  color: var(--text-700);
+.edition-row {
+  display: grid;
+  gap: 10px;
+}
+
+.edition-row__label {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-500);
   font-family: 'Lora', serif;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-.edition-tab:hover {
-  border-color: var(--gold-500);
-  color: var(--gold-600);
-}
-.edition-tab.is-active {
-  background: var(--navy-800);
-  border-color: var(--navy-800);
-  color: var(--text-light);
 }
 
-.edition-panel { display: none; }
-.edition-panel.is-active { display: block; }
+.edition-row__links .retailer-group {
+  margin-bottom: 0;
+}
 
 .retailer-group {
   margin-bottom: 18px;
@@ -696,8 +712,8 @@ h1, h2, h3, h4 {
 .retailer-icon { font-style: normal; }
 
 .region-buttons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -843,9 +859,50 @@ h1, h2, h3, h4 {
   letter-spacing: 0.03em;
 }
 
+.site-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 1100;
+  transform: translate(-50%, 16px);
+  max-width: calc(100vw - 48px);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--navy-800);
+  color: var(--text-light);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.site-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* ============================================================
    АДАПТИВНОСТЬ
    ============================================================ */
+@media (max-width: 1180px) {
+  .book-detail__header-inner {
+    grid-template-columns: 220px minmax(400px, 1fr);
+  }
+
+  .book-detail__excerpt-col {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .region-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .about__inner {
     grid-template-columns: 1fr;
@@ -858,6 +915,10 @@ h1, h2, h3, h4 {
   .book-detail__header-inner {
     grid-template-columns: 200px 1fr;
     gap: 36px;
+  }
+
+  .book-detail__excerpt-col {
+    grid-column: 1 / -1;
   }
 }
 
@@ -896,6 +957,6 @@ h1, h2, h3, h4 {
 
   .hero__name { font-size: 2.6rem; }
 
-  .region-buttons { flex-direction: column; }
+  .region-buttons { grid-template-columns: 1fr; }
   .btn--amazon { width: 100%; justify-content: center; }
 }

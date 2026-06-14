@@ -34,7 +34,7 @@
   <!-- ── ГЕРОЙ ──────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero__content container">
-      <p class="hero__tagline">Поэзия · Переводы · Песни</p>
+      <p class="hero__tagline">Стихи · Переводы</p>
       <h1 class="hero__name">
         Книжная Полка
         <span class="hero__name-line"></span>
@@ -55,20 +55,11 @@
       <div class="about__text">
         <h2 class="section-title" style="text-align:left; margin-bottom:1.5rem;">Об авторе</h2>
 
-        <!--
-          Замените этот текст своим.
-        -->
-        <p>Мордехай Гутерман — религиозный еврей и поэт, пишущий на русском языке. Для него это не противоречие, а единый путь: слово служит вере, а вера наполняет слово.</p>
-        <p>Он переводит псалмы Давида и субботние песнопения — стихами, с рифмой и ритмом, стараясь передать не только смысл, но и дыхание оригинала.</p>
-        <p>Его книги адресованы русскоязычным евреям по всему миру — тем, кто хочет приблизиться к традиции через красоту родного языка.</p>
+        <div id="author-bio"></div>
       </div>
 
       <div class="about__photo-wrap">
-        <!--
-          Когда появится фото, замените <div> на:
-          <img src="images/author.jpg" alt="Мордехай Гутерман" class="about__photo">
-        -->
-        <div class="about__photo-placeholder" title="Фото автора"></div>
+        <div id="author-photo"></div>
       </div>
     </div>
   </section>
@@ -83,6 +74,7 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="js/content.js"></script>
   <script src="js/books.js"></script>
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>

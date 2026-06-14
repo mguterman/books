@@ -115,6 +115,13 @@ const BookComponents = {
           <p class="book-detail__long-desc">${book.longDescription.replace(/\n/g, '<br>')}</p>
           <div id="buy-${book.id}" class="buy-section"></div>
         </div>
+        ${book.excerpt ? `
+          <aside class="book-detail__excerpt-col" aria-label="Отрывок">
+            ${this._dividerHTML()}
+            <h2 class="section-title">Отрывок</h2>
+            <blockquote class="excerpt-text">${book.excerpt.replace(/\n/g, '<br>')}</blockquote>
+          </aside>
+        ` : ''}
       </div>
     `;
     detail.appendChild(headerEl);
@@ -134,19 +141,6 @@ const BookComponents = {
           </div>
         </div>`;
       detail.appendChild(spreadsEl);
-    }
-
-    // ─── Отрывок ────────────────────────────────────────────
-    if (book.excerpt) {
-      const excerptEl = document.createElement('section');
-      excerptEl.className = 'book-detail__section';
-      excerptEl.innerHTML = `
-        <div class="container container--narrow">
-          ${this._dividerHTML()}
-          <h2 class="section-title">Отрывок</h2>
-          <blockquote class="excerpt-text">${book.excerpt.replace(/\n/g, '<br>')}</blockquote>
-        </div>`;
-      detail.appendChild(excerptEl);
     }
 
     // ─── Видео ──────────────────────────────────────────────
@@ -196,57 +190,38 @@ const BookComponents = {
     heading.textContent = 'Где купить';
     wrap.appendChild(heading);
 
-    const tabsEl   = document.createElement('div');
-    tabsEl.className = 'edition-tabs';
-    tabsEl.setAttribute('role', 'tablist');
+    const listEl = document.createElement('div');
+    listEl.className = 'edition-list';
 
-    const panelsEl = document.createElement('div');
-    panelsEl.className = 'edition-panels';
+    editions.forEach(edition => {
+      const enabledRetailers = (edition.retailers || []).filter(r => r.enabled !== false);
+      if (enabledRetailers.length === 0) return;
 
-    editions.forEach((edition, i) => {
-      const isActive = i === 0;
+      const row = document.createElement('div');
+      row.className = 'edition-row';
 
-      // Таб
-      const tab = document.createElement('button');
-      tab.className   = 'edition-tab' + (isActive ? ' is-active' : '');
-      tab.textContent = edition.label;
-      tab.dataset.idx = i;
-      tab.setAttribute('role', 'tab');
-      tab.setAttribute('aria-selected', String(isActive));
-      tabsEl.appendChild(tab);
+      const label = document.createElement('p');
+      label.className = 'edition-row__label';
+      label.textContent = edition.label;
+      row.appendChild(label);
 
-      // Панель
-      const panel = document.createElement('div');
-      panel.className   = 'edition-panel' + (isActive ? ' is-active' : '');
-      panel.dataset.idx = i;
-      panel.setAttribute('role', 'tabpanel');
-      this._renderRetailers(panel, edition.retailers);
-      panelsEl.appendChild(panel);
+      const links = document.createElement('div');
+      links.className = 'edition-row__links';
+      this._renderRetailers(links, enabledRetailers);
+      row.appendChild(links);
+
+      listEl.appendChild(row);
     });
 
-    // Переключение вкладок
-    tabsEl.addEventListener('click', e => {
-      const tab = e.target.closest('.edition-tab');
-      if (!tab) return;
-      const idx = tab.dataset.idx;
-      tabsEl.querySelectorAll('.edition-tab').forEach(t => {
-        t.classList.remove('is-active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      panelsEl.querySelectorAll('.edition-panel').forEach(p => p.classList.remove('is-active'));
-      tab.classList.add('is-active');
-      tab.setAttribute('aria-selected', 'true');
-      panelsEl.querySelector(`.edition-panel[data-idx="${idx}"]`).classList.add('is-active');
-    });
-
-    wrap.appendChild(tabsEl);
-    wrap.appendChild(panelsEl);
+    wrap.appendChild(listEl);
     parent.appendChild(wrap);
   },
 
   // ── Ретейлеры одного издания ─────────────────────────────
   _renderRetailers(parent, retailers) {
     retailers.forEach(retailer => {
+      if (retailer.enabled === false) return;
+
       const group = document.createElement('div');
       group.className = 'retailer-group';
 
@@ -262,10 +237,19 @@ const BookComponents = {
         retailer.regions.forEach(r => {
           const a = document.createElement('a');
           a.href      = r.url;
-          a.target    = '_blank';
-          a.rel       = 'noopener noreferrer';
           a.className = 'btn btn--amazon';
           a.innerHTML = `<span>${r.flag}</span><span>${r.label}</span>`;
+
+          if (r.url === '#') {
+            a.addEventListener('click', e => {
+              e.preventDefault();
+              this._showToast('Книга будет доступна через несколько дней');
+            });
+          } else {
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+          }
+
           regionWrap.appendChild(a);
         });
 
@@ -279,10 +263,19 @@ const BookComponents = {
 
         const a = document.createElement('a');
         a.href      = retailer.url;
-        a.target    = '_blank';
-        a.rel       = 'noopener noreferrer';
         a.className = 'btn btn--lulu';
         a.textContent = 'Купить на Lulu';
+
+        if (retailer.url === '#') {
+          a.addEventListener('click', e => {
+            e.preventDefault();
+            this._showToast('Книга будет доступна через несколько дней');
+          });
+        } else {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+
         group.appendChild(a);
       }
 
@@ -324,5 +317,24 @@ const BookComponents = {
   // ── Декоративный разделитель ─────────────────────────────
   _dividerHTML() {
     return `<div class="section-divider"><span class="divider-ornament">◆</span></div>`;
+  },
+
+  _showToast(message) {
+    let toast = document.querySelector('.site-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.className = 'site-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 2600);
   }
 };

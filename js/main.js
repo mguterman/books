@@ -23,6 +23,31 @@ function initHome() {
   if (grid) {
     BookComponents.renderGrid(grid, { all: true });
   }
+
+  renderAuthorBio();
+  renderAuthorPhoto();
+}
+
+function renderAuthorBio() {
+  const container = document.getElementById('author-bio');
+  if (!container || typeof SITE_CONTENT === 'undefined' || !SITE_CONTENT.authorBio) return;
+
+  container.innerHTML = SITE_CONTENT.authorBio
+    .map(paragraph => `<p>${paragraph}</p>`)
+    .join('');
+}
+
+function renderAuthorPhoto() {
+  const container = document.getElementById('author-photo');
+  if (!container || typeof SITE_CONTENT === 'undefined' || !SITE_CONTENT.authorPhoto) return;
+
+  container.innerHTML = `
+    <img
+      src="${SITE_CONTENT.authorPhoto}"
+      alt="Мордехай Гутерман"
+      class="about__photo"
+    >
+  `;
 }
 
 // ── Страница книги ────────────────────────────────────────────
