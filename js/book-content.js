@@ -61,11 +61,16 @@ const BOOK_CONTENT = {
       { type: "item", title: "Псалом 150", page: 144 }
     ],
     pages: [
-      // {
-      //   title: "Оглавление, стр. 1",
-      //   image: "images/pages/shir-hadash/toc-1.jpg",
-      //   alt: "Страница оглавления книги «Шир Хадаш»"
-      // }
+      {
+        layout: "spread",
+        image: "images/pages/shir-hadash/pages-108-109.jpg",
+        alt: "Разворот книги «Шир Хадаш», страницы 108-109"
+      },
+      {
+        layout: "page",
+        image: "images/pages/shir-hadash/page-149.jpg",
+        alt: "Страница группового указателя псалмов в книге «Шир Хадаш»"
+      }
     ]
   },
 

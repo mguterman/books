@@ -778,14 +778,48 @@ h1, h2, h3, h4 {
   font-family: 'Lora', serif;
   font-size: 0.86rem;
   text-align: left;
+  position: relative;
 }
 
 .page-preview img {
   width: 100%;
-  aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-md);
+}
+
+.page-preview--page {
+  max-width: 170px;
+  justify-self: center;
+}
+
+.page-preview--page img {
+  aspect-ratio: 2 / 3;
+}
+
+.page-preview--spread {
+  grid-column: 1 / -1;
+}
+
+.page-preview--spread img {
+  aspect-ratio: 1.48 / 1;
+}
+
+.page-preview--spread::after,
+.lightbox__content--spread::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(12, 20, 40, 0.18);
+  box-shadow: 0 0 18px rgba(12, 20, 40, 0.22);
+  pointer-events: none;
+}
+
+.page-preview--spread::after {
+  border-radius: 999px;
 }
 
 /* ── Секция покупки ─────────────────────────────────────── */

@@ -230,12 +230,15 @@ const BookComponents = {
   _renderPagesHTML(pages) {
     return `
       <div class="page-preview-grid">
-        ${pages.map(page => `
-          <button type="button" class="page-preview" data-page-image="${page.image}" data-page-title="${page.title}">
+        ${pages.map(page => {
+          const layout = page.layout || 'page';
+
+          return `
+          <button type="button" class="page-preview page-preview--${layout}" data-page-image="${page.image}" data-page-title="${page.alt || ''}" data-page-layout="${layout}" aria-label="${page.alt || 'Страница книги'}">
             <img src="${page.image}" alt="${page.alt || page.title}" loading="lazy">
-            <span>${page.title}</span>
           </button>
-        `).join('')}
+        `;
+        }).join('')}
       </div>
     `;
   },
@@ -265,7 +268,7 @@ const BookComponents = {
 
       tabs.querySelectorAll('[data-page-image]').forEach(button => {
         button.addEventListener('click', () => {
-          this._openLightbox(button.dataset.pageImage, button.dataset.pageTitle || '');
+          this._openLightbox(button.dataset.pageImage, button.dataset.pageTitle || '', button.dataset.pageLayout || 'page');
         });
       });
     });
@@ -376,12 +379,13 @@ const BookComponents = {
   },
 
   // ── Лайтбокс ────────────────────────────────────────────
-  _openLightbox(src, title) {
+  _openLightbox(src, title, layout = 'image') {
+    const layoutClass = layout === 'spread' ? ' lightbox__content--spread' : '';
     const overlay = document.createElement('div');
     overlay.className = 'lightbox';
     overlay.innerHTML = `
       <div class="lightbox__backdrop"></div>
-      <div class="lightbox__content">
+      <div class="lightbox__content${layoutClass}">
         <img src="${src}" alt="${title}" class="lightbox__img">
         <button class="lightbox__close" aria-label="Закрыть">✕</button>
       </div>
