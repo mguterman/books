@@ -106,11 +106,16 @@ const BOOK_CONTENT = {
       { type: "item", title: "На реках вавилонских (псалом 137)", page: 44 }
     ],
     pages: [
-      // {
-      //   title: "Оглавление, стр. 1",
-      //   image: "images/pages/shimru-shabtotai/toc-1.jpg",
-      //   alt: "Страница оглавления книги «Шимру Шабтотай»"
-      // }
+      {
+        layout: "spread",
+        image: "images/pages/shimru-shabtotai/pages-10-11.jpg",
+        alt: "Разворот книги «Шимру Шабтотай», страницы 10-11"
+      },
+      {
+        layout: "spread",
+        image: "images/pages/shimru-shabtotai/pages-30-31.jpg",
+        alt: "Разворот книги «Шимру Шабтотай», страницы 30-31"
+      }
     ]
   }
 };
