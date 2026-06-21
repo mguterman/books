@@ -17,17 +17,10 @@ const AMAZON_REGIONS = [
   { code: "PL", label: "amazon.pl",     flag: "🇵🇱", baseUrl: "https://www.amazon.pl" },
   { code: "BE", label: "amazon.com.be", flag: "🇧🇪", baseUrl: "https://www.amazon.com.be" },
   { code: "IE", label: "amazon.ie",     flag: "🇮🇪", baseUrl: "https://www.amazon.ie" },
-  { code: "JP", label: "amazon.co.jp",  flag: "🇯🇵", baseUrl: "https://www.amazon.co.jp" },
   { code: "SG", label: "amazon.sg",     flag: "🇸🇬", baseUrl: "https://www.amazon.sg" },
-  { code: "TR", label: "amazon.com.tr", flag: "🇹🇷", baseUrl: "https://www.amazon.com.tr" },
-  { code: "AE", label: "amazon.ae",     flag: "🇦🇪", baseUrl: "https://www.amazon.ae" },
-  { code: "SA", label: "amazon.sa",     flag: "🇸🇦", baseUrl: "https://www.amazon.sa" },
-  { code: "EG", label: "amazon.eg",     flag: "🇪🇬", baseUrl: "https://www.amazon.eg" },
-  { code: "IN", label: "amazon.in",     flag: "🇮🇳", baseUrl: "https://www.amazon.in" },
   { code: "AU", label: "amazon.com.au", flag: "🇦🇺", baseUrl: "https://www.amazon.com.au" },
   { code: "MX", label: "amazon.com.mx", flag: "🇲🇽", baseUrl: "https://www.amazon.com.mx" },
-  { code: "BR", label: "amazon.com.br", flag: "🇧🇷", baseUrl: "https://www.amazon.com.br" },
-  { code: "ZA", label: "amazon.co.za",  flag: "🇿🇦", baseUrl: "https://www.amazon.co.za" }
+  { code: "BR", label: "amazon.com.br", flag: "🇧🇷", baseUrl: "https://www.amazon.com.br" }
 ];
 
 const BOOKS = [
