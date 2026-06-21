@@ -117,6 +117,10 @@ const BOOKS = [
         retailers: [
           {
             platform: "amazon",
+            asin: "B0H5J12TQT",
+            regionOverrides: {
+              SE: { enabled: false }
+            },
             regions: AMAZON_REGIONS
           },
           {

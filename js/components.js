@@ -321,7 +321,8 @@ const BookComponents = {
       group.className = 'retailer-group';
 
       if (retailer.platform === 'amazon') {
-        const regions = this._prepareAmazonRegions(retailer.regions || [], retailer);
+        const regions = this._prepareAmazonRegions(retailer.regions || [], retailer)
+          .filter(r => r.enabled !== false);
         const featuredRegions = regions.filter(r => r.featured);
         const otherRegions = regions.filter(r => !r.featured);
 
