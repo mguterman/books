@@ -4,6 +4,32 @@
 //  Обложки: images/covers/<id>.jpg
 // ============================================================
 
+const AMAZON_REGIONS = [
+  { code: "US", label: "amazon.com",    flag: "🇺🇸", url: "#", featured: true, note: "Для доставки в США" },
+  { code: "DE", label: "amazon.de",     flag: "🇩🇪", url: "#", featured: true, note: "Для доставки в Израиль" },
+  { code: "UK", label: "amazon.co.uk",  flag: "🇬🇧", url: "#" },
+  { code: "CA", label: "amazon.ca",     flag: "🇨🇦", url: "#" },
+  { code: "FR", label: "amazon.fr",     flag: "🇫🇷", url: "#" },
+  { code: "IT", label: "amazon.it",     flag: "🇮🇹", url: "#" },
+  { code: "SE", label: "amazon.se",     flag: "🇸🇪", url: "#" },
+  { code: "ES", label: "amazon.es",     flag: "🇪🇸", url: "#" },
+  { code: "NL", label: "amazon.nl",     flag: "🇳🇱", url: "#" },
+  { code: "PL", label: "amazon.pl",     flag: "🇵🇱", url: "#" },
+  { code: "BE", label: "amazon.com.be", flag: "🇧🇪", url: "#" },
+  { code: "IE", label: "amazon.ie",     flag: "🇮🇪", url: "#" },
+  { code: "JP", label: "amazon.co.jp",  flag: "🇯🇵", url: "#" },
+  { code: "SG", label: "amazon.sg",     flag: "🇸🇬", url: "#" },
+  { code: "TR", label: "amazon.com.tr", flag: "🇹🇷", url: "#" },
+  { code: "AE", label: "amazon.ae",     flag: "🇦🇪", url: "#" },
+  { code: "SA", label: "amazon.sa",     flag: "🇸🇦", url: "#" },
+  { code: "EG", label: "amazon.eg",     flag: "🇪🇬", url: "#" },
+  { code: "IN", label: "amazon.in",     flag: "🇮🇳", url: "#" },
+  { code: "AU", label: "amazon.com.au", flag: "🇦🇺", url: "#" },
+  { code: "MX", label: "amazon.com.mx", flag: "🇲🇽", url: "#" },
+  { code: "BR", label: "amazon.com.br", flag: "🇧🇷", url: "#" },
+  { code: "ZA", label: "amazon.co.za",  flag: "🇿🇦", url: "#" }
+];
+
 const BOOKS = [
   {
     id: "shir-hadash",
@@ -38,12 +64,7 @@ const BOOKS = [
         retailers: [
           {
             platform: "amazon",
-            regions: [
-              { code: "US", label: "amazon.com",   flag: "🇺🇸", url: "#" },
-              { code: "UK", label: "amazon.co.uk", flag: "🇬🇧", url: "#" },
-              { code: "DE", label: "amazon.de",    flag: "🇩🇪", url: "#" },
-              { code: "CA", label: "amazon.ca",    flag: "🇨🇦", url: "#" }
-            ]
+            regions: AMAZON_REGIONS
           },
           {
             platform: "lulu",
@@ -59,12 +80,7 @@ const BOOKS = [
         retailers: [
           {
             platform: "amazon",
-            regions: [
-              { code: "US", label: "amazon.com",   flag: "🇺🇸", url: "#" },
-              { code: "UK", label: "amazon.co.uk", flag: "🇬🇧", url: "#" },
-              { code: "DE", label: "amazon.de",    flag: "🇩🇪", url: "#" },
-              { code: "CA", label: "amazon.ca",    flag: "🇨🇦", url: "#" }
-            ]
+            regions: AMAZON_REGIONS
           },
           {
             platform: "lulu",
@@ -106,12 +122,7 @@ const BOOKS = [
         retailers: [
           {
             platform: "amazon",
-            regions: [
-              { code: "US", label: "amazon.com",   flag: "🇺🇸", url: "#" },
-              { code: "UK", label: "amazon.co.uk", flag: "🇬🇧", url: "#" },
-              { code: "DE", label: "amazon.de",    flag: "🇩🇪", url: "#" },
-              { code: "CA", label: "amazon.ca",    flag: "🇨🇦", url: "#" }
-            ]
+            regions: AMAZON_REGIONS
           },
           {
             platform: "lulu",

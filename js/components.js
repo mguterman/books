@@ -326,29 +326,49 @@ const BookComponents = {
         label.innerHTML = '<span class="retailer-icon">&#128230;</span> Amazon';
         group.appendChild(label);
 
-        const regionWrap = document.createElement('div');
-        regionWrap.className = 'region-buttons';
+        const featuredRegions = (retailer.regions || []).filter(r => r.featured);
+        const otherRegions = (retailer.regions || []).filter(r => !r.featured);
 
-        retailer.regions.forEach(r => {
-          const a = document.createElement('a');
-          a.href      = r.url;
-          a.className = 'btn btn--amazon';
-          a.innerHTML = `<span>${r.flag}</span><span>${r.label}</span>`;
+        if (featuredRegions.length > 0) {
+          const featuredWrap = document.createElement('div');
+          featuredWrap.className = 'featured-region-list';
 
-          if (r.url === '#') {
-            a.addEventListener('click', e => {
-              e.preventDefault();
-              this._showToast('Книга будет доступна через несколько дней');
-            });
-          } else {
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-          }
+          featuredRegions.forEach(r => {
+            const option = document.createElement('div');
+            option.className = 'amazon-region-option';
+            option.appendChild(this._createAmazonRegionLink(r));
 
-          regionWrap.appendChild(a);
-        });
+            if (r.note) {
+              const note = document.createElement('p');
+              note.className = 'amazon-region-note';
+              note.textContent = r.note;
+              option.appendChild(note);
+            }
 
-        group.appendChild(regionWrap);
+            featuredWrap.appendChild(option);
+          });
+
+          group.appendChild(featuredWrap);
+        }
+
+        if (otherRegions.length > 0) {
+          const details = document.createElement('details');
+          details.className = 'amazon-more';
+
+          const summary = document.createElement('summary');
+          summary.textContent = 'Прочие Amazon площадки';
+          details.appendChild(summary);
+
+          const regionWrap = document.createElement('div');
+          regionWrap.className = 'region-buttons';
+
+          otherRegions.forEach(r => {
+            regionWrap.appendChild(this._createAmazonRegionLink(r));
+          });
+
+          details.appendChild(regionWrap);
+          group.appendChild(details);
+        }
 
       } else if (retailer.platform === 'lulu') {
         const label = document.createElement('p');
@@ -376,6 +396,25 @@ const BookComponents = {
 
       parent.appendChild(group);
     });
+  },
+
+  _createAmazonRegionLink(region) {
+    const a = document.createElement('a');
+    a.href = region.url;
+    a.className = 'btn btn--amazon';
+    a.innerHTML = `<span>${region.flag}</span><span>${region.label}</span>`;
+
+    if (region.url === '#') {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        this._showToast('Книга будет доступна через несколько дней');
+      });
+    } else {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+
+    return a;
   },
 
   // ── Лайтбокс ────────────────────────────────────────────

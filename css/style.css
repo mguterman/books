@@ -875,9 +875,44 @@ h1, h2, h3, h4 {
 
 .retailer-icon { font-style: normal; }
 
+.featured-region-list {
+  display: grid;
+  gap: 12px;
+}
+
+.amazon-region-option {
+  display: grid;
+  gap: 5px;
+}
+
+.amazon-region-note {
+  color: var(--text-500);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.amazon-more {
+  margin-top: 14px;
+}
+
+.amazon-more summary {
+  color: var(--gold-600);
+  cursor: pointer;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.amazon-more summary:hover {
+  color: var(--gold-500);
+}
+
+.amazon-more .region-buttons {
+  margin-top: 10px;
+}
+
 .region-buttons {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
