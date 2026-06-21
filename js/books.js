@@ -5,29 +5,29 @@
 // ============================================================
 
 const AMAZON_REGIONS = [
-  { code: "US", label: "amazon.com",    flag: "🇺🇸", url: "#", featured: true, note: "Для доставки в США" },
-  { code: "DE", label: "amazon.de",     flag: "🇩🇪", url: "#", featured: true, note: "Для доставки в Израиль" },
-  { code: "UK", label: "amazon.co.uk",  flag: "🇬🇧", url: "#" },
-  { code: "CA", label: "amazon.ca",     flag: "🇨🇦", url: "#" },
-  { code: "FR", label: "amazon.fr",     flag: "🇫🇷", url: "#" },
-  { code: "IT", label: "amazon.it",     flag: "🇮🇹", url: "#" },
-  { code: "SE", label: "amazon.se",     flag: "🇸🇪", url: "#" },
-  { code: "ES", label: "amazon.es",     flag: "🇪🇸", url: "#" },
-  { code: "NL", label: "amazon.nl",     flag: "🇳🇱", url: "#" },
-  { code: "PL", label: "amazon.pl",     flag: "🇵🇱", url: "#" },
-  { code: "BE", label: "amazon.com.be", flag: "🇧🇪", url: "#" },
-  { code: "IE", label: "amazon.ie",     flag: "🇮🇪", url: "#" },
-  { code: "JP", label: "amazon.co.jp",  flag: "🇯🇵", url: "#" },
-  { code: "SG", label: "amazon.sg",     flag: "🇸🇬", url: "#" },
-  { code: "TR", label: "amazon.com.tr", flag: "🇹🇷", url: "#" },
-  { code: "AE", label: "amazon.ae",     flag: "🇦🇪", url: "#" },
-  { code: "SA", label: "amazon.sa",     flag: "🇸🇦", url: "#" },
-  { code: "EG", label: "amazon.eg",     flag: "🇪🇬", url: "#" },
-  { code: "IN", label: "amazon.in",     flag: "🇮🇳", url: "#" },
-  { code: "AU", label: "amazon.com.au", flag: "🇦🇺", url: "#" },
-  { code: "MX", label: "amazon.com.mx", flag: "🇲🇽", url: "#" },
-  { code: "BR", label: "amazon.com.br", flag: "🇧🇷", url: "#" },
-  { code: "ZA", label: "amazon.co.za",  flag: "🇿🇦", url: "#" }
+  { code: "US", label: "amazon.com",    flag: "🇺🇸", baseUrl: "https://www.amazon.com",    featured: true, note: "Для доставки в США" },
+  { code: "DE", label: "amazon.de",     flag: "🇩🇪", baseUrl: "https://www.amazon.de",     featured: true, note: "Для доставки в Израиль" },
+  { code: "UK", label: "amazon.co.uk",  flag: "🇬🇧", baseUrl: "https://www.amazon.co.uk" },
+  { code: "CA", label: "amazon.ca",     flag: "🇨🇦", baseUrl: "https://www.amazon.ca" },
+  { code: "FR", label: "amazon.fr",     flag: "🇫🇷", baseUrl: "https://www.amazon.fr" },
+  { code: "IT", label: "amazon.it",     flag: "🇮🇹", baseUrl: "https://www.amazon.it" },
+  { code: "SE", label: "amazon.se",     flag: "🇸🇪", baseUrl: "https://www.amazon.se" },
+  { code: "ES", label: "amazon.es",     flag: "🇪🇸", baseUrl: "https://www.amazon.es" },
+  { code: "NL", label: "amazon.nl",     flag: "🇳🇱", baseUrl: "https://www.amazon.nl" },
+  { code: "PL", label: "amazon.pl",     flag: "🇵🇱", baseUrl: "https://www.amazon.pl" },
+  { code: "BE", label: "amazon.com.be", flag: "🇧🇪", baseUrl: "https://www.amazon.com.be" },
+  { code: "IE", label: "amazon.ie",     flag: "🇮🇪", baseUrl: "https://www.amazon.ie" },
+  { code: "JP", label: "amazon.co.jp",  flag: "🇯🇵", baseUrl: "https://www.amazon.co.jp" },
+  { code: "SG", label: "amazon.sg",     flag: "🇸🇬", baseUrl: "https://www.amazon.sg" },
+  { code: "TR", label: "amazon.com.tr", flag: "🇹🇷", baseUrl: "https://www.amazon.com.tr" },
+  { code: "AE", label: "amazon.ae",     flag: "🇦🇪", baseUrl: "https://www.amazon.ae" },
+  { code: "SA", label: "amazon.sa",     flag: "🇸🇦", baseUrl: "https://www.amazon.sa" },
+  { code: "EG", label: "amazon.eg",     flag: "🇪🇬", baseUrl: "https://www.amazon.eg" },
+  { code: "IN", label: "amazon.in",     flag: "🇮🇳", baseUrl: "https://www.amazon.in" },
+  { code: "AU", label: "amazon.com.au", flag: "🇦🇺", baseUrl: "https://www.amazon.com.au" },
+  { code: "MX", label: "amazon.com.mx", flag: "🇲🇽", baseUrl: "https://www.amazon.com.mx" },
+  { code: "BR", label: "amazon.com.br", flag: "🇧🇷", baseUrl: "https://www.amazon.com.br" },
+  { code: "ZA", label: "amazon.co.za",  flag: "🇿🇦", baseUrl: "https://www.amazon.co.za" }
 ];
 
 const BOOKS = [
@@ -64,6 +64,7 @@ const BOOKS = [
         retailers: [
           {
             platform: "amazon",
+            asin: "B0H5LJQCHV",
             regions: AMAZON_REGIONS
           },
           {
@@ -80,6 +81,7 @@ const BOOKS = [
         retailers: [
           {
             platform: "amazon",
+            asin: "B0H5HR37NL",
             regions: AMAZON_REGIONS
           },
           {

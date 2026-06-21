@@ -326,8 +326,9 @@ const BookComponents = {
         label.innerHTML = '<span class="retailer-icon">&#128230;</span> Amazon';
         group.appendChild(label);
 
-        const featuredRegions = (retailer.regions || []).filter(r => r.featured);
-        const otherRegions = (retailer.regions || []).filter(r => !r.featured);
+        const regions = this._prepareAmazonRegions(retailer.regions || [], retailer);
+        const featuredRegions = regions.filter(r => r.featured);
+        const otherRegions = regions.filter(r => !r.featured);
 
         if (featuredRegions.length > 0) {
           const featuredWrap = document.createElement('div');
@@ -415,6 +416,23 @@ const BookComponents = {
     }
 
     return a;
+  },
+
+  _prepareAmazonRegions(regions, retailer) {
+    const overrides = retailer.regionOverrides || {};
+
+    return regions.map(region => {
+      const override = overrides[region.code] || {};
+      const asinUrl = retailer.asin && region.baseUrl
+        ? `${region.baseUrl}/dp/${retailer.asin}`
+        : '#';
+
+      return {
+        ...region,
+        url: asinUrl,
+        ...override
+      };
+    });
   },
 
   // ── Лайтбокс ────────────────────────────────────────────
