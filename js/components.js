@@ -352,7 +352,7 @@ const BookComponents = {
           details.className = 'amazon-more';
 
           const summary = document.createElement('summary');
-          summary.textContent = 'Прочие Amazon площадки';
+          summary.textContent = 'Купить на других Amazon сайтах';
           details.appendChild(summary);
 
           const regionWrap = document.createElement('div');
