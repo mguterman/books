@@ -321,11 +321,6 @@ const BookComponents = {
       group.className = 'retailer-group';
 
       if (retailer.platform === 'amazon') {
-        const label = document.createElement('p');
-        label.className = 'retailer-label';
-        label.innerHTML = '<span class="retailer-icon">&#128230;</span> Amazon';
-        group.appendChild(label);
-
         const regions = this._prepareAmazonRegions(retailer.regions || [], retailer);
         const featuredRegions = regions.filter(r => r.featured);
         const otherRegions = regions.filter(r => !r.featured);
