@@ -337,7 +337,6 @@ const BookComponents = {
           featuredRegions.forEach(r => {
             const option = document.createElement('div');
             option.className = 'amazon-region-option';
-            option.appendChild(this._createAmazonRegionLink(r));
 
             if (r.note) {
               const note = document.createElement('p');
@@ -346,6 +345,7 @@ const BookComponents = {
               option.appendChild(note);
             }
 
+            option.appendChild(this._createAmazonRegionLink(r));
             featuredWrap.appendChild(option);
           });
 

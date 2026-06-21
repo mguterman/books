@@ -882,7 +882,9 @@ h1, h2, h3, h4 {
 
 .amazon-region-option {
   display: grid;
-  gap: 5px;
+  grid-template-columns: minmax(150px, 1fr) minmax(150px, auto);
+  gap: 10px;
+  align-items: center;
 }
 
 .amazon-region-note {
@@ -1261,6 +1263,11 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 480px) {
+  .amazon-region-option {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
   .book-tabs__list {
     gap: 3px;
   }
