@@ -5,8 +5,8 @@
 // ============================================================
 
 const AMAZON_REGIONS = [
-  { code: "US", label: "amazon.com",    flag: "🇺🇸", baseUrl: "https://www.amazon.com",    featured: true, note: "Самый удобный для доставки по США:" },
-  { code: "DE", label: "amazon.de",     flag: "🇩🇪", baseUrl: "https://www.amazon.de",     featured: true, note: "Самый удобный для доставки в Израиль:" },
+  { code: "US", label: "amazon.com",    flag: "🇺🇸", baseUrl: "https://www.amazon.com",    featured: true },
+  { code: "DE", label: "amazon.de",     flag: "🇩🇪", baseUrl: "https://www.amazon.de" },
   { code: "UK", label: "amazon.co.uk",  flag: "🇬🇧", baseUrl: "https://www.amazon.co.uk" },
   { code: "CA", label: "amazon.ca",     flag: "🇨🇦", baseUrl: "https://www.amazon.ca" },
   { code: "FR", label: "amazon.fr",     flag: "🇫🇷", baseUrl: "https://www.amazon.fr" },
