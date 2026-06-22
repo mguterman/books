@@ -428,6 +428,55 @@ h1, h2, h3, h4 {
   transform: scale(1.05);
 }
 
+.book-card--soon {
+  background: transparent;
+  box-shadow: none;
+}
+
+.book-card--soon:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.book-card__cover-wrap--soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(193, 154, 107, 0.45);
+  background:
+    linear-gradient(135deg, rgba(248, 244, 237, 0.96), rgba(235, 226, 211, 0.92)),
+    var(--paper);
+}
+
+.book-card__soon-art {
+  width: calc(100% - 42px);
+  height: calc(100% - 42px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  border: 1px solid rgba(28, 45, 60, 0.22);
+  color: var(--navy-800);
+  font-family: 'Playfair Display', serif;
+  padding: 28px;
+}
+
+.book-card__soon-kicker {
+  font-family: 'Lora', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.book-card__soon-art strong {
+  font-size: 1.8rem;
+  line-height: 1.18;
+  font-weight: 600;
+}
+
 .book-card__body {
   padding: 20px 22px 26px;
   display: flex;

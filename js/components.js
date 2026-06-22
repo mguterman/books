@@ -18,6 +18,10 @@ const BookComponents = {
   renderCard(parent, bookId) {
     const book = this.getBook(bookId);
     if (!book) return;
+    if (book.soon) {
+      this.renderSoonCard(parent);
+      return;
+    }
 
     const card = document.createElement('article');
     card.className = 'book-card';
@@ -46,6 +50,20 @@ const BookComponents = {
     parent.appendChild(card);
   },
 
+  renderSoonCard(parent) {
+    const card = document.createElement('article');
+    card.className = 'book-card book-card--soon';
+    card.innerHTML = `
+      <div class="book-card__cover-wrap book-card__cover-wrap--soon" aria-label="Новая книга готовится к выпуску">
+        <div class="book-card__soon-art">
+          <span class="book-card__soon-kicker">Новая книга</span>
+          <strong>готовится к<br>выпуску</strong>
+        </div>
+      </div>
+    `;
+    parent.appendChild(card);
+  },
+
   // ── Сетка книг ───────────────────────────────────────────
   // options: { featured: true } | { all: true } | { ids: ['id1', 'id2'] }
   renderGrid(parent, options = { all: true }) {
@@ -64,7 +82,7 @@ const BookComponents = {
   renderDetail(parent, bookId) {
     const book = this.getBook(bookId);
 
-    if (!book) {
+    if (!book || book.soon) {
       parent.innerHTML = `
         <div class="container" style="padding: 80px 24px; text-align: center;">
           <p style="font-size:1.1rem; color: var(--text-500);">
