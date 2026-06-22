@@ -19,7 +19,7 @@ const BookComponents = {
     const book = this.getBook(bookId);
     if (!book) return;
     if (book.soon) {
-      this.renderSoonCard(parent);
+      this.renderSoonCard(parent, book);
       return;
     }
 
@@ -50,7 +50,7 @@ const BookComponents = {
     parent.appendChild(card);
   },
 
-  renderSoonCard(parent) {
+  renderSoonCard(parent, book) {
     const card = document.createElement('article');
     card.className = 'book-card book-card--soon';
     card.innerHTML = `
@@ -58,6 +58,7 @@ const BookComponents = {
         <div class="book-card__soon-art">
           <span class="book-card__soon-kicker">Новая книга</span>
           <strong>готовится к<br>выпуску</strong>
+          ${book.soonTitle ? `<span class="book-card__soon-title">${book.soonTitle}</span>` : ''}
         </div>
       </div>
     `;

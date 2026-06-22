@@ -477,6 +477,14 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
+.book-card__soon-title {
+  max-width: 220px;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-700);
+}
+
 .book-card__body {
   padding: 20px 22px 26px;
   display: flex;
