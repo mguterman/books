@@ -91,7 +91,6 @@ const BOOKS = [
 
   {
     id: "shimru-shabtotai",
-    soon: true,
     soonTitle: "\"Шимру Шабтотай\" - поэтические переводы субботних песен.",
 
     title:    "Шимру Шабтотай",
