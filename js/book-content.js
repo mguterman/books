@@ -81,39 +81,39 @@ const BOOK_CONTENT = {
       { type: "item", title: "Менуха ве-симха", page: 4 },
       { type: "item", title: "Ма Йедидут", page: 6 },
       { type: "item", title: "Йом зе ле Исраэль.", page: 10 },
-      { type: "item", title: "Ко-Рибон", page: 12 },
-      { type: "item", title: "Цама нафши", page: 14 },
-      { type: "item", title: "Цур-мишело", page: 20 },
+      { type: "item", title: "Ко-Рибон", page: 14 },
+      { type: "item", title: "Цама нафши", page: 16 },
+      { type: "item", title: "Цур-мишело", page: 22 },
 
       { type: "heading", title: "Песни для утра Субботы", visible: true },
-      { type: "item", title: "Барух кэль-эльон", page: 22 },
-      { type: "item", title: "Йом зе мехубад", page: 26 },
-      { type: "item", title: "Йом шабатон", page: 28 },
-      { type: "item", title: "Ки Эшмера Шабат", page: 30 },
-      { type: "item", title: "Дрор йикра", page: 32 },
-      { type: "item", title: "Шимру Шабтотай", page: 34 },
+      { type: "item", title: "Барух кэль-эльон", page: 26 },
+      { type: "item", title: "Йом зе мехубад", page: 30 },
+      { type: "item", title: "Йом шабатон", page: 34 },
+      { type: "item", title: "Ки Эшмера Шабат", page: 36 },
+      { type: "item", title: "Дрор йикра", page: 40 },
+      { type: "item", title: "Шимру Шабтотай", page: 42 },
 
       { type: "heading", title: "Песни для третьей трапезы", visible: true },
-      { type: "item", title: "Мизмор ле Давид (псалом 23)", page: 38 },
-      { type: "item", title: "Йедит нефеш.", page: 40 },
+      { type: "item", title: "Мизмор ле Давид (псалом 23)", page: 48 },
+      { type: "item", title: "Йедит нефеш.", page: 50 },
 
       {
         type: "heading",
         title: "Псалмы, читаемые в благословении после трапезы (биркат-а-мазон)",
         visible: true
       },
-      { type: "item", title: "Шир-а-маалот (псалом 126)", page: 42 },
-      { type: "item", title: "На реках вавилонских (псалом 137)", page: 44 }
+      { type: "item", title: "Шир-а-маалот (псалом 126)", page: 52 },
+      { type: "item", title: "На реках вавилонских (псалом 137)", page: 54 }
     ],
     pages: [
       {
         layout: "spread",
-        image: "images/pages/shimru-shabtotai/pages-10-11.jpg",
+        image: "images/pages/shimru-shabtotai/pages-10-11.jpg?v=20260709-2",
         alt: "Разворот книги «Шимру Шабтотай», страницы 10-11"
       },
       {
         layout: "spread",
-        image: "images/pages/shimru-shabtotai/pages-30-31.jpg",
+        image: "images/pages/shimru-shabtotai/pages-30-31.jpg?v=20260709-2",
         alt: "Разворот книги «Шимру Шабтотай», страницы 30-31"
       }
     ]
