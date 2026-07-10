@@ -108,12 +108,12 @@ const BOOK_CONTENT = {
     pages: [
       {
         layout: "spread",
-        image: "images/pages/shimru-shabtotai/pages-10-11.jpg?v=20260709-2",
+        image: "images/pages/shimru-shabtotai/pages-10-11.jpg?v=20260709-3",
         alt: "Разворот книги «Шимру Шабтотай», страницы 10-11"
       },
       {
         layout: "spread",
-        image: "images/pages/shimru-shabtotai/pages-30-31.jpg?v=20260709-2",
+        image: "images/pages/shimru-shabtotai/pages-30-31.jpg?v=20260709-3",
         alt: "Разворот книги «Шимру Шабтотай», страницы 30-31"
       }
     ]
